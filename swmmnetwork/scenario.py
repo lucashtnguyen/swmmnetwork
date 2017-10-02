@@ -7,7 +7,7 @@ def assignrename(df, xtype, volcol):
 
 
 class ScenarioHydro(object):
-    def __init__(self, inp, rpt):
+    def __init__(self, inp, rpt, proxycol='Pollutant_lbs'):
         """
         inp: swmmreport.InpFile().
         rpt: swmmreport.ReportFile().
@@ -16,6 +16,7 @@ class ScenarioHydro(object):
         # import hydrology
         self.inp = inp
         self.rpt = rpt
+        self.proxycol = proxycol
 
         self.flow_unit = (rpt.orig_file[rpt._find_line('Flow Units')]
                              .split('.')
@@ -27,8 +28,7 @@ class ScenarioHydro(object):
         if self.flow_unit == 'CFS':
             self.subcatchment_volcol = 'Total_Runoff_mgal'
             self.node_volcol = 'Total_Inflow_Volume_mgals'
-            self.outfall_volcol = 'Total_Volume_mgal'
-            self.proxycol = 'Pollutant_lbs'
+            self.outfall_volcol = 'Total_Volume_10_6_gal'
             self.vol_unit = 'mgal'
         else:
             e = 'Only standard units supported.'
