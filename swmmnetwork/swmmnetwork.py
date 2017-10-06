@@ -219,7 +219,7 @@ class SwmmNetwork(nx.MultiDiGraph):
                                 eff_conc = ((1 - 0.7) * conc_in)
                                 data[load_col] = eff_conc * data[vol_col]
 
-                        if any([i in node for i in self.outfall_flags]):
+                        if any([i in str(node) for i in self.outfall_flags]):
                             # assume no load reduction or vol reduction
                             load_out = load_in
                             vol_out = vol_in
